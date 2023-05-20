@@ -5,7 +5,7 @@
 
 int main(int argc, char **argv)
 {
-    const char *fname = "notes.txt";
+    const char *fname = "notes.txt"; 
     if (argv[2] == "/?") {
         printf("%s\n", "Usage: NOTES [filename] [/?]\nFilename defaults to 'file.txt'.");
         return 0;
