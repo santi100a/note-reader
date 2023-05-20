@@ -20,43 +20,18 @@ jobs:
         with:
           name: windows
           path: dist/
-  build-linux:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Build
-        run: |
-         gcc --version
-         if [ $? -ne 0 ]; then
-          sudo apt update && sudo apt install gcc 
-         fi
-         gcc eng.c -o dist/english.exe && g++ esp.cpp -o dist/spanish.exe
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: linux
-          path: dist/
+  
   release:
-    needs: 
-      - build-windows
-      - build-linux 
+    needs: build-windows
     runs-on: ubuntu-latest
     steps:
-      - name: Download Windows build
+      - name: Download build
         uses: actions/download-artifact@v3
         with: 
           name: windows
-          path: windows/dist/
-      - name: Download Linux build
-        uses: actions/download-artifact@v3
-        with: 
-          name: linux
-          path: linux/dist/
+          path: dist/
       - name: Package Windows build
-        run: tar -czf windows.tgz windows/dist 
-      - name: Package Linux build
-        run: tar -czf linux.tgz linux/dist 
+        run: tar -czf windows.tgz dist 
       - name: Release
         uses: ncipollo/release-action@v1.12.0
         with:
@@ -66,6 +41,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           draft: false
           prerelease: false
-          artifacts: ./*.tgz
+          artifacts: ./windows.tgz
 
 
