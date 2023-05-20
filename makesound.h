@@ -1,5 +1,5 @@
 #include "frequencies.h"
-#include "windows.media.h"
+#include "windows.h"
 
 void makesound(char chr, int duration)
 {
