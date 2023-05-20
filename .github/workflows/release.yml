@@ -13,13 +13,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Set up Chocolatey
-        run: |
-          Set-ExecutionPolicy Bypass -Scope Process -Force;
-          iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'));
-          refreshenv;
-      - name: Install MinGW
-        run: choco install mingw -y
       - name: Build
         run: gcc eng.c -o dist/english.exe && g++ esp.cpp -o dist/spanish.exe
       - name: Upload artifact
@@ -28,14 +21,17 @@ jobs:
           name: windows
           path: dist/
   build-linux:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Install gcc
-        run: sudo apt update && sudo apt install gcc 
       - name: Build
-        run: gcc eng.c -o dist/english.exe && g++ esp.cpp -o dist/spanish.exe
+        run: |
+         gcc --version
+         if [ $? -ne 0 ]; then
+          sudo apt update && sudo apt install gcc 
+         fi
+         gcc eng.c -o dist/english.exe && g++ esp.cpp -o dist/spanish.exe
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:

@@ -1,5 +1,5 @@
 #include "stdio.h"
-#include "windows.media.h"
+#include "windows.h"
 #include "string.h"
 #include "makesound.h"
 
