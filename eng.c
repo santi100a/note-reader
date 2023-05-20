@@ -9,7 +9,7 @@ int main(int argc, char **argv)
     if (argv[2] == "/?") {
         printf("%s\n", "Usage: NOTES [filename] [/?]\nFilename defaults to 'file.txt'.");
         return 0;
-    }
+    } 
     FILE *file = fopen(fname, "r");
     const int duration = 2000;  
     if (file == NULL || ferror(file))
