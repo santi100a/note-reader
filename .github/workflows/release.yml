@@ -13,9 +13,9 @@ jobs:
     steps:
       - name: Set up Chocolatey
         run: |
-          Set-ExecutionPolicy Bypass -Scope Process -Force; \
+          Set-ExecutionPolicy Bypass -Scope Process -Force;
           iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'));
-          refreshenv
+          refreshenv;
       - name: Install MinGW
         run: choco install mingw -y
       - name: Build

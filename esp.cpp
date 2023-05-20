@@ -82,8 +82,7 @@ int main(int argc, char *argv[]) {
 		}
 
 	}
-	notes.close(); 
-
+	notes.close();
     std::cout <<("\nPresiona cualquier tecla para salir. ");
     system("pause>nul");
     
